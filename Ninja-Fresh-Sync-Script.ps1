@@ -96,12 +96,59 @@ function Write-Log {
 
 function Send-WebhookNotification {
     param([string]$Title, [string]$Message, [string]$Color = "good")
-    if ([string]::IsNullOrWhiteSpace($script:Config.WebhookUri)) { return }
-    $payload = @{
-        attachments = @( @{ title = $Title; text = $Message; color = $Color } )
-    } | ConvertTo-Json
+    if ([string]::IsNullOrWhiteSpace($script:Config.Webhook.Uri)) { return }
+    
+    $payload = $null
+    $webhookFormat = $script:Config.Webhook.Format
+
+    if ($webhookFormat -eq 'Teams') {
+        $cardColor = switch ($Color) {
+            'danger' { 'Attention' }
+            'good'   { 'Good' }
+            default  { 'Default' }
+        }
+        $formattedMessage = $Message -replace "`n", "`r`n"
+        
+        $payload = @{
+            type = 'message'
+            attachments = @(
+                @{
+                    contentType = 'application/vnd.microsoft.card.adaptive'
+                    content = @{
+                        type    = 'AdaptiveCard'
+                        version = '1.4'
+                        schema  = 'http://adaptivecards.io/schemas/adaptive-card.json'
+                        body    = @(
+                            @{
+                                type   = 'TextBlock'
+                                text   = $Title
+                                weight = 'Bolder'
+                                size   = 'Large'
+                                color  = $cardColor
+                            },
+                            @{
+                                type = 'TextBlock'
+                                text = $formattedMessage
+                                wrap = $true
+                            }
+                        )
+                    }
+                }
+            )
+        } | ConvertTo-Json -Depth 5
+
+    } elseif ($webhookFormat -eq 'Slack') {
+        $payload = @{
+            attachments = @( @{ title = $Title; text = $Message; color = $Color } )
+        } | ConvertTo-Json
+
+    } else {
+        Write-Log -Message "Webhook format '$($webhookFormat)' in config.json is unknown. Notification not sent." -Level WARN
+        return
+    }
+
     try {
-        Invoke-RestMethod -Uri $script:Config.WebhookUri -Method Post -Body $payload -ContentType 'application/json' -ErrorAction Stop
+        Invoke-RestMethod -Uri $script:Config.Webhook.Uri -Method Post -Body $payload -ContentType 'application/json' -ErrorAction Stop
         Write-Log -Message "Successfully sent webhook notification." -Level DEBUG
     } catch {
         Write-Log -Message "Failed to send webhook notification: $($_.Exception.Message)" -Level WARN

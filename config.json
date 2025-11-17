@@ -1,7 +1,10 @@
 {
   "NinjaRegion": "us",
   "FreshSubdomain": "your-company",
-  "WebhookUri": "https://hooks.slack.com/services/...",
+  "Webhook": {
+    "Uri": "https://your-company.webhook.office.com/...",
+    "Format": "Teams" 
+  },
   "Secrets": {
     "UseSecretManagement": true,
     "NinjaClientId": "NinjaClientId_SecretName_In_Vault",

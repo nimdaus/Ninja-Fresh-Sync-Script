@@ -1,0 +1,11 @@
+{
+  "NinjaRegion": "us",
+  "FreshSubdomain": "your-company",
+  "WebhookUri": "https://hooks.slack.com/services/...",
+  "Secrets": {
+    "UseSecretManagement": true,
+    "NinjaClientId": "NinjaClientId_SecretName_In_Vault",
+    "NinjaClientSecret": "NinjaClientSecret_SecretName_In_Vault",
+    "FreshApiKey": "FreshApiKey_SecretName_In_Vault"
+  }
+}

@@ -1,0 +1,45 @@
+{
+    "mappings":  {
+                     "roleToAssetType":  {
+                                             "WINDOWS_WORKSTATION":  {
+                                                                         "field_mappings":  [
+                                                                                                {
+                                                                                                    "fs_label":  "Display Name",
+                                                                                                    "fs_name":  "name",
+                                                                                                    "ninja_field":  "systemName"
+                                                                                                },
+                                                                                                {
+                                                                                                    "fs_label":  "Asset State",
+                                                                                                    "fs_name":  "asset_state_32000087675",
+                                                                                                    "static_value":  "In Use"
+                                                                                                },
+                                                                                                {
+                                                                                                    "fs_label":  "Serial Number",
+                                                                                                    "fs_name":  "serial_number_32000087675",
+                                                                                                    "ninja_field":  "system.biosSerialNumber"
+                                                                                                },
+                                                                                                {
+                                                                                                    "fs_label":  "OS",
+                                                                                                    "fs_name":  "os_32000087680",
+                                                                                                    "ninja_field":  "os.name"
+                                                                                                }
+                                                                                            ],
+                                                                         "asset_type_name":  "Computer",
+                                                                         "product_field_name":  "product_32000087675",
+                                                                         "asset_type_id":  32000087680,
+                                                                         "unique_identifier_mapping":  {
+                                                                                                           "fs_label":  "Serial Number",
+                                                                                                           "fs_name":  "serial_number_32000087675",
+                                                                                                           "ninja_field":  "system.biosSerialNumber"
+                                                                                                       }
+                                                                     }
+                                         },
+                     "modelToProduct":  {
+                                            "Parallels ARM Virtual Machine":  {
+                                                                                  "product_name":  "Parallels ARM Virtual Machine",
+                                                                                  "product_id":  32000209034
+                                                                              }
+                                        }
+                 },
+    "generatedAtUtc":  "2025-11-18T16:21:04.0638617Z"
+}

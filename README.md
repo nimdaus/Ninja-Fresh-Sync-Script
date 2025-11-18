@@ -50,7 +50,7 @@ Use the template below for your `config.json` file.
 
 ```json
 {
-  "NinjaRegion": "oc.ninjarmm.com",
+  "NinjaRegion": "app",
   "FreshSubdomain": "your-company",
   "Secrets": {
     "UseSecretManagement": true,

@@ -1,5 +1,5 @@
 {
-  "NinjaRegion": "us",
+  "NinjaRegion": "app",
   "FreshSubdomain": "your-company",
   "Webhook": {
     "Uri": "https://your-company.webhook.office.com/...",
